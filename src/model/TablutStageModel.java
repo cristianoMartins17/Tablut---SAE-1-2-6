@@ -36,6 +36,7 @@ public class TablutStageModel extends GameStageModel {
     private TablutBoard board;
     private Pawn[] blackPawns;
     private Pawn[] grayPawns;
+    private Pawn king;
     private TextElement playerName;
     // Uncomment next line if the example with a main container is used. see end of HoleStageFactory and HoleStageView
     //private ContainerElement mainContainer;
@@ -90,6 +91,14 @@ public class TablutStageModel extends GameStageModel {
         }
     }
 
+    public Pawn getKing() {
+        return king;
+    }
+
+    public void setKing(Pawn king) {
+        this.king = king;
+    }
+
     public TextElement getPlayerName() {
         return playerName;
     }
@@ -97,6 +106,7 @@ public class TablutStageModel extends GameStageModel {
         this.playerName = playerName;
         addElement(playerName);
     }
+
 
 
     private void setupCallbacks() {

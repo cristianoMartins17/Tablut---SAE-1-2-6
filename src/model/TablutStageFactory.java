@@ -39,8 +39,10 @@ public class TablutStageFactory extends StageElementsFactory {
         }
 
         Pawn king = new Pawn(stageModel, 3, 2);
+        board.addElement(king, 4,4);
 
 
+        stageModel.setKing(king);
         stageModel.setBlackPawns(blacks);
         stageModel.setGrayPawns(grays);
 
