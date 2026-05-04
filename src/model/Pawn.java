@@ -8,8 +8,8 @@ import boardifier.model.GameStageModel;
 public class Pawn extends GameElement {
     private int number;
     private int color;
-    public static int MOSCOVITE= 0;
-    public static int SUEDOIS = 1;
+    public static int BLACK= 0;
+    public static int GRAY = 1;
     public static int ROI=2;
 
 
