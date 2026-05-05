@@ -64,6 +64,10 @@ public class TablutController extends Controller{
     }
 
     public void endOfTurn(){
+        model.setNextPlayer();
+        Player p = model.getCurrentPlayer();
+        TablutStageModel stageModel = (TablutStageModel) model.getGameStage();
+        stageModel.getPlayerName().setText(p.getName());
     }
     private boolean analyseAndPlay(String line){
         // analyse si un coup et correct
