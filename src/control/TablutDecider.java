@@ -9,7 +9,6 @@ import boardifier.model.Model;
 import boardifier.model.action.ActionList;
 import model.TablutBoard;
 import model.TablutStageModel;
-import model.Pawn;
 
 import java.awt.*;
 import java.util.Calendar;
@@ -27,7 +26,6 @@ public class TablutDecider extends Decider {
 
     @Override
     public ActionList decide() {
-        // truc pour le bot
 
 
         return null;

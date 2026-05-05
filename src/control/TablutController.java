@@ -27,7 +27,14 @@ public class TablutController extends Controller{
 
 
     public void stageLoop(){
-        // permet alterner les tours
+        consoleIn = new BufferedReader(new InputStreamReader(System.in));
+        update();
+        while(! model.isEndStage()) {
+            playTurn();
+            endOfTurn();
+            update();
+        }
+        endGame();
     }
 
     private void playTurn(){

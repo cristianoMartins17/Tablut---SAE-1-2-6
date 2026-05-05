@@ -1,17 +1,17 @@
+import boardifier.control.ActionFactory;
+import boardifier.control.ActionPlayer;
 import boardifier.control.Controller;
-import boardifier.control.Logger;
-import boardifier.model.GameException;
-import boardifier.model.GameStageModel;
-import boardifier.model.StageElementsFactory;
-import boardifier.view.View;
 import boardifier.control.StageFactory;
-import boardifier.model.Model;
+import boardifier.model.*;
+import boardifier.model.action.ActionList;
+import boardifier.view.View;
+import control.TablutController;
 import model.TablutStageFactory;
 
 
 public static void main(String[] args) {
 // enregistrer le stage
-    StageFactory.registerModelAndView("tablut", "model.TablutStageModel", "view.TablutStageView");
+    StageFactory.registerModelAndView("tablut", "model.TablutStageModel", "View.TablutStageLook");
 
 // créer le modèle global
     Model model = new Model();
@@ -19,11 +19,12 @@ public static void main(String[] args) {
 // créer la vue
     View view = new View(model);
 
-    Controller controller = new Controller(model, view) {
-        public void stageLoop() {
-            // vide pour l'instant
-        }
-    };
+
+    TablutController controller = new TablutController(model, view);
+    controller.setFirstStageName("tablut");
+
+    model.addHumanPlayer("Joueur 1");
+    model.addHumanPlayer("Joueur 2");
 
     controller.setFirstStageName("tablut");
     try {

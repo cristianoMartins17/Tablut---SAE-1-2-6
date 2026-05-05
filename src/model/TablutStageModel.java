@@ -72,7 +72,9 @@ public class TablutStageModel extends GameStageModel {
     }
 
     public void setKing(TablutPawn king) {
+
         this.king = king;
+        addElement(king);
     }
 
     public TextElement getPlayerName() {

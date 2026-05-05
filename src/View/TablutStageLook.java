@@ -55,7 +55,7 @@ public class TablutStageLook extends GameStageView {
            This is also why the initial location for the pawn elements is meaningless.
          */
         // create a TextLook for the text element
-        addLook(new TextLook(model.getPlayerName()));
+//        addLook(new TextLook(model.getPlayerName()));
         // create a ClassicBoardLook (with borders and coordinates) for the main board.
         addLook(new ClassicBoardLook(2, 4, model.getBoard(), 1, 1, true));
         // create looks for both pots

@@ -18,8 +18,10 @@ public class TablutPawn extends GameElement {
         this.number=number;
         this.color=color;
 
-        ElementTypes.register("pawn", 50);
-        setType(50);
+
+
+        ElementTypes.register("pawn", 51);
+        setType(51);
     }
 
     public int getNumber() {
