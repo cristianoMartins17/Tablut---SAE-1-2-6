@@ -51,7 +51,7 @@ public class TablutController extends Controller{
                 System.out.print(p.getName() + " -> ");
                 try {
                     String line = consoleIn.readLine();
-                    if ( line.length() == 3 ){
+                    if ( line.length() == 4 ){
                         ok = analyseAndPlay(line);
                     }
                     if(!ok){
@@ -71,6 +71,25 @@ public class TablutController extends Controller{
     }
     private boolean analyseAndPlay(String line){
         // analyse si un coup et correct
+        TablutStageModel gameStage = (TablutStageModel) model.getGameStage();
+        int colPawn = (int) (line.charAt(0)- 'A');
+        int rowPawn = (int) (line.charAt(1)- '1');
+        if ((colPawn<0)||(colPawn>2) return false;
+        if ((rowPawn<0)||(rowPawn>2)) return false;
+        int col = (int) (line.charAt(2) - 'A');
+        int row = (int) (line.charAt(3) - '1');
+        if ((col<0)||(col>2)) return false;
+        if ((row<0)||(row>2)) return false;
+        ContainerElement pot = null;
+        if (model.getIdPlayer() ==0){
+            // black pawn
+        } else {
+            // white pawn
+        }
+        if(pot.isEmptyAt(colPawn,0)) return false;
+        if(pot.isEmptyAt(rowPawn,0)) return false;
+        GameElement pawn = pot.getElement(colPawn,rowPawn);
+        // a finir
         return true;
     }
 
