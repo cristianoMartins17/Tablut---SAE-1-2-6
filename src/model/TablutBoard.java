@@ -3,6 +3,8 @@ package model;
 import boardifier.model.ContainerElement;
 import boardifier.model.GameStageModel;
 
+import java.awt.*;
+
 public class TablutBoard extends ContainerElement {
     public TablutBoard(int x, int y, GameStageModel gameStageModel) {
         // call the super-constructor to create a 3x3 grid, named "holeboard", and in x,y in space
@@ -40,7 +42,9 @@ public class TablutBoard extends ContainerElement {
         return  (i<9 && i>=0 && j<9 && j>=0);
     }
 
-    public List<Point> computeValidMoves(int row, int col)
+//    public List<Point> computeValidMoves(int row, int col) {
+//
+//    }
 
 
     /*/
