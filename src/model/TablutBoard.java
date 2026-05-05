@@ -36,6 +36,18 @@ public class TablutBoard extends ContainerElement {
 //
 //    }
 
+    public boolean isOccuped(int i, int j) {
+        return (validPosition(i,j) && grid[i][j].isEmpty());
+    }
+
+    public boolean isNeighborOccuped(int i, int j, Point vector) {
+        int sumVector = vector.x+vector.y;
+        if (sumVector!=-1 && sumVector!=1) {
+            throw new IllegalArgumentException("Error : vector must only move 1 componant in 1 axe");
+        }
+        return isOccuped(i+vector.y,j+vector.x );
+    }
+
     public boolean isCaptured(int i, int j) {
         if (grid[i][j]==null) {
             return false;
@@ -43,6 +55,11 @@ public class TablutBoard extends ContainerElement {
         if (grid[i][j] instanceof TablutPawn pawn) {
 
         }
+
+
+        // à compléter
+
+        return false;
     }
 
     public boolean validPosition(int i, int j) {
@@ -52,11 +69,9 @@ public class TablutBoard extends ContainerElement {
     public void computeValidMoves1Direction(int i, int j, List<Point> lst, Point vector) {
         while (validPosition(i,j)) {
             lst.add(new Point(j,i));
-            i+=(int) vector.getY();
-            j+=(int) vector.getX();
+            i+=vector.y;
+            j+=vector.y;
         }
-
-
     }
 
     public List<Point> computeValidMoves(int i, int j) {
@@ -75,7 +90,6 @@ public class TablutBoard extends ContainerElement {
         computeValidMoves1Direction(i,j, result, new Point(-1 , 0));
 
         return result;
-
 
     }
 
