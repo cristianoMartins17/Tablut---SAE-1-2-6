@@ -74,7 +74,7 @@ public class TablutController extends Controller{
         TablutStageModel gameStage = (TablutStageModel) model.getGameStage();
         int colPawn = (int) (line.charAt(0)- 'A');
         int rowPawn = (int) (line.charAt(1)- '1');
-        if ((colPawn<0)||(colPawn>2) return false;
+        if ((colPawn<0)||(colPawn>2)) return false;
         if ((rowPawn<0)||(rowPawn>2)) return false;
         int col = (int) (line.charAt(2) - 'A');
         int row = (int) (line.charAt(3) - '1');
