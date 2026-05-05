@@ -36,6 +36,10 @@ public class TablutBoard extends ContainerElement {
 //
 //    }
 
+    public boolean isCorner(int i, int j) {
+        return i==0 && j==0 || i==0 && j==8 || i==8 && j==0 || i==8 && j==8;
+    }
+
     public boolean isOccuped(int i, int j) {
         return (validPosition(i,j) && grid[i][j].isEmpty());
     }
