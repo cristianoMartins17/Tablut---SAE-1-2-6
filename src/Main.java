@@ -1,26 +1,37 @@
-public class Main{
+import boardifier.control.Controller;
+import boardifier.control.Logger;
+import boardifier.model.GameException;
+import boardifier.model.GameStageModel;
+import boardifier.model.StageElementsFactory;
+import boardifier.view.View;
+import boardifier.control.StageFactory;
+import boardifier.model.Model;
+import model.TablutStageFactory;
 
-    public static void main(String[] args){
-        Plateau p1 = new Plateau();
-        System.out.println(p1);
 
-        //choix d'une case vide comme case de départ
-        System.out.println(p1.deplacerPion(1, 1, 2, 3));
+public static void main(String[] args) {
+// enregistrer le stage
+    StageFactory.registerModelAndView("tablut", "model.TablutStageModel", "view.TablutStageView");
 
-        //déplacement vertical valide (noir de (0,3) vers (2,3))
-        System.out.println(p1.deplacerPion(0, 3, 2, 3));
+// créer le modèle global
+    Model model = new Model();
 
-        //déplacement en diagonale (doit être refusé)
-        System.out.println(p1.deplacerPion(0, 3, 2, 5));
+// créer la vue
+    View view = new View(model);
 
-        //chemin bloqué
-        System.out.println(p1.deplacerPion(0, 4, 3, 4));
+    Controller controller = new Controller(model, view) {
+        public void stageLoop() {
+            // vide pour l'instant
+        }
+    };
 
-        //hors du plateau
-        System.out.println(p1.deplacerPion(0, 3, -1, 3));
-
-        //déplacement horizontal valide
-        System.out.println(p1.deplacerPion(5, 0, 5, 3));
+    controller.setFirstStageName("tablut");
+    try {
+        controller.startGame();
+        controller.stageLoop();
+    } catch (GameException e) {
+        System.out.println(e.getMessage());
     }
 
 }
+
