@@ -36,9 +36,18 @@ public class TablutBoard extends ContainerElement {
 //
 //    }
 
+    public boolean isCenter(int i, int j) {
+        return i==4 && j==4;
+    }
+
+    public boolean isCorner(int i, int j) {
+        return i==0 && j==0 || i==0 && j==8 || i==8 && j==0 || i==8 && j==8;
+    }
+
     public boolean isOccuped(int i, int j) {
         return (validPosition(i,j) && grid[i][j].isEmpty());
     }
+
 
     public boolean isNeighborOccuped(int i, int j, Point vector) {
         int sumVector = vector.x+vector.y;
@@ -55,7 +64,6 @@ public class TablutBoard extends ContainerElement {
         if (grid[i][j] instanceof TablutPawn pawn) {
 
         }
-
 
         // à compléter
 
