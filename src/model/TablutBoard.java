@@ -40,19 +40,32 @@ public class TablutBoard extends ContainerElement {
         return  (i<9 && i>=0 && j<9 && j>=0);
     }
 
+    public List<Point> computeValidMoves(int row, int col)
+
 
     /*/
     return an array of the neighbors of a tile in the grid,
     [ NORTH , EST, SOUTH, WEST ]
     */
     public TablutPawn[] getNeighbors(int i, int j) {
+        TablutPawn[] neighbors = new TablutPawn[4];
 
-        return null;
+        // Nord
+        if (validPosition(i-1, j)) neighbors[0] = (TablutPawn) getElement(i-1, j);
 
+        // Est
+        if (validPosition(i, j+1)) neighbors[1] = (TablutPawn) getElement(i, j+1);
 
+        // Sud
+        if (validPosition(i+1, j)) neighbors[2] = (TablutPawn) getElement(i+1, j);
 
+        // Ouest
+        if (validPosition(i, j-1)) neighbors[3] = (TablutPawn) getElement(i, j-1);
 
+        return neighbors;
     }
+
+
 
 
 
