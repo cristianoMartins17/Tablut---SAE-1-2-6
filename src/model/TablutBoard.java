@@ -14,6 +14,7 @@ public class TablutBoard extends ContainerElement {
     public TablutBoard(int x, int y, GameStageModel gameStageModel) {
         // call the super-constructor to create a 3x3 grid, named "holeboard", and in x,y in space
         super("tablutboard", x, y, 9 , 9, gameStageModel);
+
     }
 
 
@@ -58,6 +59,8 @@ public class TablutBoard extends ContainerElement {
     }
 
     public boolean isCaptured(int i, int j) {
+        if (!validPosition(i,j)) {throw new IllegalArgumentException("Error : invalid position");}
+
         if (grid[i][j]==null) {
             return false;
         }
@@ -75,10 +78,13 @@ public class TablutBoard extends ContainerElement {
     }
 
     public void computeValidMoves1Direction(int i, int j, List<Point> lst, Point vector) {
-        while (validPosition(i,j)) {
+        i+=vector.y;
+        j+=vector.x;
+
+        while (grid[i][j].isEmpty() && validPosition(i,j)) { // grid is an array that contains an array that contains a list so we use .isEmpty to check if there is nothing at this position
             lst.add(new Point(j,i));
             i+=vector.y;
-            j+=vector.y;
+            j+=vector.x;
         }
     }
 
@@ -100,7 +106,6 @@ public class TablutBoard extends ContainerElement {
         return result;
 
     }
-
 
     /*/
     return an array of the neighbors of a tile in the grid,
