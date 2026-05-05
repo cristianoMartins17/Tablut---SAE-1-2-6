@@ -66,12 +66,12 @@ public class TablutBoard extends ContainerElement {
         }
         if (!grid[i][j].isEmpty()) {
             if (!grid[i][j-1].isEmpty() && !grid[i][j+1].isEmpty()) {
-                if (((TablutPawn)grid[i][j-1].getFirst()).getColor() == ((TablutPawn)grid[i][j+1].getFirst()).getColor() && ((TablutPawn)grid[i][j-1].getFirst()).getColor() != ((TablutPawn)grid[i][j].getFirst()).getColor()) {
+                if (((TablutPawn)grid[i][j-1].get(0)).getColor() == ((TablutPawn)grid[i][j+1].get(0)).getColor() && ((TablutPawn)grid[i][j-1].get(0)).getColor() != ((TablutPawn)grid[i][j].get(0)).getColor()) {
                     return true;
                 }
             }
             if (!grid[i-1][j].isEmpty() && !grid[i+1][j].isEmpty()){
-                if (((TablutPawn)grid[i-1][j].getFirst()).getColor() == ((TablutPawn)grid[i+1][j].getFirst()).getColor() && ((TablutPawn)grid[i][j-1].getFirst()).getColor() != ((TablutPawn)grid[i][j].getFirst()).getColor()) {
+                if (((TablutPawn)grid[i-1][j].get(0)).getColor() == ((TablutPawn)grid[i+1][j].get(0)).getColor() && ((TablutPawn)grid[i][j-1].get(0)).getColor() != ((TablutPawn)grid[i][j].get(0)).getColor()) {
                     return true;
                 }
             }
