@@ -3,10 +3,6 @@ package model;
 import boardifier.model.ContainerElement;
 import boardifier.model.GameStageModel;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-
 public class TablutBoard extends ContainerElement {
     public TablutBoard(int x, int y, GameStageModel gameStageModel) {
         // call the super-constructor to create a 3x3 grid, named "holeboard", and in x,y in space
@@ -15,7 +11,7 @@ public class TablutBoard extends ContainerElement {
 
 //    public List<Point> computeValidCells(int number) {
 //        List<Point> lst = new ArrayList<>();
-//        Pawn p = null;
+//        TablutPawn p = null;
 //        // if the grid is empty, is it the first turn and thus, all cells are valid
 //        if (isEmpty()) {
 //            // i are rows
@@ -49,7 +45,7 @@ public class TablutBoard extends ContainerElement {
     return an array of the neighbors of a tile in the grid,
     [ NORTH , EST, SOUTH, WEST ]
     */
-    public Pawn[] getNeighbors(int i, int j) {
+    public TablutPawn[] getNeighbors(int i, int j) {
 
         return null;
 

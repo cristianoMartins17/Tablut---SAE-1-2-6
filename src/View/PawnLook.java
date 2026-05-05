@@ -3,7 +3,7 @@ package View;
 import boardifier.model.GameElement;
 import boardifier.view.ConsoleColor;
 import boardifier.view.ElementLook;
-import model.Pawn;
+import model.TablutPawn;
 
 public class PawnLook extends ElementLook {
 
@@ -13,7 +13,7 @@ public class PawnLook extends ElementLook {
 
     protected void render() {
 
-        Pawn pawn = (Pawn)element;
+        TablutPawn pawn = (TablutPawn)element;
         shape[0][0] = pawn.getColor() + ConsoleColor.WHITE_BACKGROUND + pawn.getNumber() + ConsoleColor.RESET;
     }
 }

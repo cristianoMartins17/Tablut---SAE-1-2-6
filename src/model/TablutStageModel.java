@@ -10,9 +10,9 @@ public class TablutStageModel extends GameStageModel {
     private int redPawnsToPlay;
     // define stage game elements
     private TablutBoard board;
-    private Pawn[] blackPawns;
-    private Pawn[] grayPawns;
-    private Pawn king;
+    private TablutPawn[] blackPawns;
+    private TablutPawn[] grayPawns;
+    private TablutPawn king;
     private TextElement playerName;
     // Uncomment next line if the example with a main container is used. see end of HoleStageFactory and HoleStageView
     //private ContainerElement mainContainer;
@@ -46,32 +46,32 @@ public class TablutStageModel extends GameStageModel {
     }
 
 
-    public Pawn[] getBlackPawns() {
+    public TablutPawn[] getBlackPawns() {
         return blackPawns;
     }
-    public void setBlackPawns(Pawn[] blackPawns) {
+    public void setBlackPawns(TablutPawn[] blackPawns) {
         this.blackPawns = blackPawns;
         for(int i=0;i<blackPawns.length;i++) {
             addElement(blackPawns[i]);
         }
     }
 
-    public Pawn[] getGrayPawns() {
+    public TablutPawn[] getGrayPawns() {
         return grayPawns;
     }
 
-    public void setGrayPawns(Pawn[] grayPawns) {
+    public void setGrayPawns(TablutPawn[] grayPawns) {
         this.grayPawns = grayPawns;
         for(int i = 0; i< grayPawns.length; i++) {
             addElement(grayPawns[i]);
         }
     }
 
-    public Pawn getKing() {
+    public TablutPawn getKing() {
         return king;
     }
 
-    public void setKing(Pawn king) {
+    public void setKing(TablutPawn king) {
         this.king = king;
     }
 
@@ -89,7 +89,7 @@ public class TablutStageModel extends GameStageModel {
         onPutInContainer( (element, gridDest, rowDest, colDest) -> {
             // just check when pawns are put in 3x3 board
             if (gridDest != board) return;
-            Pawn p = (Pawn) element;
+            TablutPawn p = (TablutPawn) element;
             if (p.getColor() == 0) {
                 blackPawnsToPlay--;
             }
@@ -111,7 +111,7 @@ public class TablutStageModel extends GameStageModel {
         int nbRed = 0;
         int countBlack = 0;
         int countRed = 0;
-        Pawn p = null;
+        TablutPawn p = null;
         int row, col;
         for (i = 0; i < 9; i+=2) {
             if (board.isEmptyAt(i / 3, i % 3)) break;
@@ -122,8 +122,8 @@ public class TablutStageModel extends GameStageModel {
         for (int j = 0; j < 4; j++) {
             // skip invalid cells
             if ((row >= 0) && (row <= 2) && (col >= 0) && (col <= 2)) {
-                p = (Pawn) (board.getElement(row, col));
-                if (p.getColor() == Pawn.MOSCOVITE) {
+                p = (TablutPawn) (board.getElement(row, col));
+                if (p.getColor() == TablutPawn.MOSCOVITE) {
                     nbBlack++;
                     countBlack += p.getNumber();
                 } else {
