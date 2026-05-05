@@ -18,8 +18,8 @@ public class Pawn extends GameElement {
         this.number=number;
         this.color=color;
 
-        ElementTypes.register("pawn", 31);
-        setType(31);
+        ElementTypes.register("pawn", 50);
+        setType(50);
     }
 
     public int getNumber() {
@@ -29,6 +29,4 @@ public class Pawn extends GameElement {
     public int getColor() {
         return color;
     }
-
-
 }
