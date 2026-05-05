@@ -62,7 +62,19 @@ public class TablutBoard extends ContainerElement {
     public List<Point> computeValidMoves(int i, int j) {
         List<Point> result = new ArrayList<>();
 
+        // up
+        computeValidMoves1Direction(i,j,result, new Point(0,1));
 
+        // right
+        computeValidMoves1Direction(i,j,result, new Point(1,0));
+
+        //bottom
+        computeValidMoves1Direction(i,j,result,new Point(0,-1));
+
+        //left
+        computeValidMoves1Direction(i,j, result, new Point(-1 , 0));
+
+        return result;
 
 
     }
