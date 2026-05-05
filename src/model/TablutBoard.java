@@ -64,12 +64,18 @@ public class TablutBoard extends ContainerElement {
         if (grid[i][j]==null) {
             return false;
         }
-        if (grid[i][j] instanceof TablutPawn pawn) {
-
+        if (!grid[i][j].isEmpty()) {
+            if (!grid[i][j-1].isEmpty() && !grid[i][j+1].isEmpty()) {
+                if (((TablutPawn)grid[i][j-1].getFirst()).getColor() == ((TablutPawn)grid[i][j+1].getFirst()).getColor() && ((TablutPawn)grid[i][j-1].getFirst()).getColor() != ((TablutPawn)grid[i][j].getFirst()).getColor()) {
+                    return true;
+                }
+            }
+            if (!grid[i-1][j].isEmpty() && !grid[i+1][j].isEmpty()){
+                if (((TablutPawn)grid[i-1][j].getFirst()).getColor() == ((TablutPawn)grid[i+1][j].getFirst()).getColor() && ((TablutPawn)grid[i][j-1].getFirst()).getColor() != ((TablutPawn)grid[i][j].getFirst()).getColor()) {
+                    return true;
+                }
+            }
         }
-
-        // à compléter
-
         return false;
     }
 
