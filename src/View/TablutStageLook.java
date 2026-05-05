@@ -1,4 +1,4 @@
-package view;
+package View;
 
 import boardifier.control.Logger;
 import boardifier.model.GameStageModel;
@@ -7,6 +7,7 @@ import boardifier.view.ContainerLook;
 import boardifier.view.GameStageView;
 
 import boardifier.view.TextLook;
+import model.TablutStageModel;
 
 
 /**
@@ -39,7 +40,7 @@ public class TablutStageLook extends GameStageView {
 
     @Override
     public void createLooks() {
-        HoleStageModel model = (HoleStageModel)gameStageModel;
+        TablutStageModel model = (TablutStageModel) gameStageModel;
 
         /* Creating all the looks for all the game elements that are created by
            the HoleStageFactory.
@@ -58,13 +59,13 @@ public class TablutStageLook extends GameStageView {
         // create a ClassicBoardLook (with borders and coordinates) for the main board.
         addLook(new ClassicBoardLook(2, 4, model.getBoard(), 1, 1, true));
         // create looks for both pots
-        addLook(new BlackPawnPotLook(model.getBlackPot()));
-        addLook(new RedPawnPotLook(2, 4, model.getRedPot()));
-        // create looks for all pawns
-        for(int i=0;i<4;i++) {
+        for(int i=0;i<16;i++) {
             addLook(new PawnLook(model.getBlackPawns()[i]));
-            addLook(new PawnLook(model.getRedPawns()[i]));
         }
+        for (int i=0;i<8;i++) {
+            addLook(new PawnLook(model.getGrayPawns()[i]));
+        }
+        addLook(new PawnLook(model.getKing()));
 
 
         /*
