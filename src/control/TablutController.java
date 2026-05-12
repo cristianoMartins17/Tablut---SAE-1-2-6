@@ -93,4 +93,15 @@ public class TablutController extends Controller{
         return true;
     }
 
+    public boolean syntaxCheck(String line) {
+
+        line = line.replace(" ", "");
+        if (line.length()!=4 && line.length()!=6) {return false;}
+
+        // à compléter
+        return false;
+
+
+    }
+
 }
