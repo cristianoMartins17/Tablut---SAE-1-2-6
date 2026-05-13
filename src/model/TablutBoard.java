@@ -101,8 +101,13 @@ public class TablutBoard extends ContainerElement {
 
     }
 
+
+    public Point[] getNeighborsCoordinates(int i, int j) {
+        return new Point[] {new Point(j, i-1),new Point(j+1, i),new Point(j, i+1),new Point(j-1, i)};
+    }
+
     /*/
-    return an array of the neighbors of a tile in the grid,
+    return an array of the neighbors of a cell in the grid,
     [ NORTH , EST, SOUTH, WEST ]
     */
 

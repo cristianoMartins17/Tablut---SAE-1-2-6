@@ -7,6 +7,7 @@ import boardifier.model.GameElement;
 import boardifier.model.Model;
 import boardifier.model.Player;
 import boardifier.model.action.ActionList;
+import boardifier.model.action.RemoveFromContainerAction;
 import boardifier.view.View;
 import model.TablutBoard;
 import model.TablutStageModel;
@@ -101,12 +102,15 @@ public class TablutController extends Controller{
         System.out.println(dest.y+" "+dest);
 
 
-        ActionList actions= ActionFactory.generateMoveWithinContainer(model, pawn, dest.y , dest.x);
-        actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
-        ActionPlayer play = new ActionPlayer(model, this, actions);
+        ActionList movement= ActionFactory.generateMoveWithinContainer(model, pawn, dest.y , dest.x);
+
+
+
+        movement.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
+        ActionPlayer play = new ActionPlayer(model, this, movement);
         play.start();
 
-        System.out.println(board.getElement(dest.y,dest.x));
+
         return true;
 
 
@@ -145,6 +149,24 @@ public class TablutController extends Controller{
         char letter=Character.isAlphabetic(c1) ? c1 : c2;
         char digit = Character.isDigit(c1) ? c1 : c2;
         return new Point(letter-'A',digit-'1');
+    }
+
+
+    public ArrayList<RemoveFromContainerAction> getCaptures(int i, int j) {
+        ArrayList<RemoveFromContainerAction> removes = new ArrayList<>();
+        TablutStageModel gameStage = (TablutStageModel) model.getGameStage();
+        TablutBoard board = gameStage.getBoard();
+        Point[] neighborsCoordinates = board.getNeighborsCoordinates(i,j);
+        for (Point coordinate : neighborsCoordinates) {
+            int row=coordinate.y;
+            int col=coordinate.x;
+            if (board.isCaptured(row, col)) {
+                RemoveFromContainerAction action = new RemoveFromContainerAction(model, board.getFirstElement(row, col));
+                removes.add(action);
+            }
+        }
+        return removes;
+
     }
 
 }
