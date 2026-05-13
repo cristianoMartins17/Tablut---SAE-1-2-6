@@ -72,6 +72,7 @@ public class TablutController extends Controller{
         TablutStageModel stageModel = (TablutStageModel) model.getGameStage();
         stageModel.getPlayerName().setText(p.getName());
     }
+
     private boolean analyseAndPlay(String line){
         // analyse si un coup et corrert
         TablutStageModel gameStage = (TablutStageModel) model.getGameStage();
@@ -89,17 +90,24 @@ public class TablutController extends Controller{
         System.out.println(start+" : "+dest);
 
         ArrayList<Point> validsDirections = new ArrayList<>(gameStage.getBoard().computeValidMoves(start.y,start.x));
+        System.out.println(validsDirections);
         if (!validsDirections.contains(dest) || board.getElements(start.y,start.x).isEmpty()) {return false;}
 
         GameElement pawn = board.getElement(start.y, start.x);
 
 
-        ActionList actions= ActionFactory.generateMoveWithinContainer(model, pawn, dest.y , start.x);
+        System.out.println(dest.y+" "+dest);
+
+
+        ActionList actions= ActionFactory.generateMoveWithinContainer(model, pawn, dest.y , dest.x);
         actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
         ActionPlayer play = new ActionPlayer(model, this, actions);
         play.start();
 
+        System.out.println(board.getElement(dest.y,dest.x));
         return true;
+
+
     }
 
     public boolean syntaxCheck(String line) {
