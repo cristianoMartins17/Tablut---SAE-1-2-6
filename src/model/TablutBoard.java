@@ -75,7 +75,14 @@ public class TablutBoard extends ContainerElement {
         if (grid[i][j]==null || grid[i][j].isEmpty()) {
             return false;
         }
-        return false;
+        TablutPawn pawn = (TablutPawn) grid[i][j].get(0);
+        if (pawn.getColor()!=TablutPawn.ROI) {
+            return !safeCell(pawn, i+1,j) && !safeCell(pawn, i-1, j)  || !safeCell(pawn, i,j+1) && !safeCell(pawn,i,j-1);
+        }
+        else {
+            return !safeCell(pawn, i+1,j) && !safeCell(pawn, i-1, j)  && !safeCell(pawn, i,j+1) && !safeCell(pawn,i,j-1);
+
+        }
     }
 
     public boolean validPosition(int i, int j) {
