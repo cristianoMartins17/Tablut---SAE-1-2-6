@@ -72,22 +72,28 @@ public class TablutController extends Controller{
         stageModel.getPlayerName().setText(p.getName());
     }
     private boolean analyseAndPlay(String line){
-        // analyse si un coup et correct
+        // analyse si un coup et corrert
         TablutStageModel gameStage = (TablutStageModel) model.getGameStage();
 
         if (!syntaxCheck(line)) {return false;}
+
+
 
         int n = line.length();
 
         Point begin = getIndexs(line.charAt(0), line.charAt(1));
         Point dest = getIndexs(line.charAt(n-2), line.charAt(n-1));
 
+        System.out.println(begin+" "+dest);
+
+        System.out.println(gameStage.getBoard().computeValidMoves(begin.y,begin.x));
+
         ContainerElement board = gameStage.getBoard();
 
 
         GameElement pawn = board.getElement(begin.y, begin.x);
 
-        System.out.println(begin.y+" "+ begin.x);
+
         // a finir
         return true;
     }

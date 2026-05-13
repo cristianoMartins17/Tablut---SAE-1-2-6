@@ -87,7 +87,7 @@ public class TablutBoard extends ContainerElement {
         i+=vector.y;
         j+=vector.x;
 
-        while (grid[i][j].isEmpty() && validPosition(i,j)) { // grid is an array that contains an array that contains a list so we use .isEmpty to check if there is nothing at this position
+        while ( validPosition(i,j) && grid[i][j].isEmpty() ) { // grid is an array that contains an array that contains a list so we use .isEmpty to check if there is nothing at this position
             lst.add(new Point(j,i));
             i+=vector.y;
             j+=vector.x;
