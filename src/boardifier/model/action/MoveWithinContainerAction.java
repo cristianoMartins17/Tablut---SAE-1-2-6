@@ -46,6 +46,7 @@ public class MoveWithinContainerAction extends GameAction {
         if (container != null) {
 
             container.moveElement(element, rowDest, colDest);
+
         }
         onEndCallback.execute();
     }

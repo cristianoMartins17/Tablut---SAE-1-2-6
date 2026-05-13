@@ -2,6 +2,7 @@ package model;
 
 import boardifier.model.GameStageModel;
 import boardifier.model.StageElementsFactory;
+import boardifier.model.TextElement;
 
 public class TablutStageFactory extends StageElementsFactory {
 
@@ -48,6 +49,8 @@ public class TablutStageFactory extends StageElementsFactory {
 
         board.addElement(king, 4,4);
 
+
+        stageModel.setPlayerName(new TextElement(" ", stageModel));
         stageModel.setKing(king);
         stageModel.setBlackPawns(moscovite);
         stageModel.setGrayPawns(soldats);

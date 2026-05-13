@@ -80,6 +80,7 @@ public class TablutStageModel extends GameStageModel {
     public TextElement getPlayerName() {
         return playerName;
     }
+
     public void setPlayerName(TextElement playerName) {
         this.playerName = playerName;
         addElement(playerName);

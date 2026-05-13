@@ -66,7 +66,7 @@ public class TablutStageLook extends GameStageView {
             addLook(new PawnLook(model.getGrayPawns()[i]));
         }
         addLook(new PawnLook(model.getKing()));
-
+        addLook(new TextLook(model.getPlayerName()));
 
         /*
         Example using a main container (see HoleStageFactory),

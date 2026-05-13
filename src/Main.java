@@ -13,6 +13,7 @@ public class Main {
 // enregistrer le stage
         StageFactory.registerModelAndView("tablut", "model.TablutStageModel", "View.TablutStageLook");
 
+
 // créer le modèle global
         Model model = new Model();
 
@@ -33,6 +34,8 @@ public class Main {
         } catch (GameException e) {
             System.out.println(e.getMessage());
         }
+
+
 
     }
 }

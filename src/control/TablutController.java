@@ -8,15 +8,16 @@ import boardifier.model.ContainerElement;
 import boardifier.model.Model;
 import boardifier.model.Player;
 import boardifier.model.action.ActionList;
+import boardifier.model.action.MoveWithinContainerAction;
 import boardifier.view.View;
+import model.TablutBoard;
 import model.TablutStageModel;
 
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
-
+import java.util.ArrayList;
 
 
 public class TablutController extends Controller{
@@ -74,6 +75,7 @@ public class TablutController extends Controller{
     private boolean analyseAndPlay(String line){
         // analyse si un coup et corrert
         TablutStageModel gameStage = (TablutStageModel) model.getGameStage();
+        TablutBoard board = gameStage.getBoard();
 
         if (!syntaxCheck(line)) {return false;}
 
@@ -81,20 +83,22 @@ public class TablutController extends Controller{
 
         int n = line.length();
 
-        Point begin = getIndexs(line.charAt(0), line.charAt(1));
+        Point start = getIndexs(line.charAt(0), line.charAt(1));
         Point dest = getIndexs(line.charAt(n-2), line.charAt(n-1));
 
-        System.out.println(begin+" "+dest);
+        System.out.println(start+" : "+dest);
 
-        System.out.println(gameStage.getBoard().computeValidMoves(begin.y,begin.x));
+        ArrayList<Point> validsDirections = new ArrayList<>(gameStage.getBoard().computeValidMoves(start.y,start.x));
+        if (!validsDirections.contains(dest) || board.getElements(start.y,start.x).isEmpty()) {return false;}
 
-        ContainerElement board = gameStage.getBoard();
-
-
-        GameElement pawn = board.getElement(begin.y, begin.x);
+        GameElement pawn = board.getElement(start.y, start.x);
 
 
-        // a finir
+        ActionList actions= ActionFactory.generateMoveWithinContainer(model, pawn, dest.y , start.x);
+        actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
+        ActionPlayer play = new ActionPlayer(model, this, actions);
+        play.start();
+
         return true;
     }
 
