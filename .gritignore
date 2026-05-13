@@ -1,2 +1,6 @@
 *.js
 *.html
+/out/
+/.idea/
+/*.class
+/doc/
