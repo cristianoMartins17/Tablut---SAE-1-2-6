@@ -20,24 +20,6 @@ public class TablutBoard extends ContainerElement {
 
 
 
-//    public List<Point> computeValidCells(int number) {
-//        List<Point> lst = new ArrayList<>();
-//        TablutPawn p = null;
-//        // if the grid is empty, is it the first turn and thus, all cells are valid
-//        if (isEmpty()) {
-//            // i are rows
-//            for(int i=0;i<3;i++) {
-//                // j are cols
-//                for (int j = 0; j < 3; j++) {
-//                    // cols is in x direction and rows are in y direction, so create a point in (j,i)
-//                    lst.add(new Point(j,i));
-//                }
-//            }
-//            return lst;
-//        }
-//
-//    }
-
     public boolean isCenter(int i, int j) {
         return i==4 && j==4;
     }
@@ -93,7 +75,7 @@ public class TablutBoard extends ContainerElement {
         i+=vector.y;
         j+=vector.x;
 
-        while ( validPosition(i,j) && grid[i][j].isEmpty() ) { // grid is an array that contains an array that contains a list so we use .isEmpty to check if there is nothing at this position
+        while ( validPosition(i,j) && grid[i][j].isEmpty() ) {
             lst.add(new Point(j,i));
             i+=vector.y;
             j+=vector.x;
