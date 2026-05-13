@@ -52,7 +52,7 @@ public class TablutBoard extends ContainerElement {
     }
 
     public boolean isCaptured(int i, int j) {
-        if (!validPosition(i,j)) {throw new IllegalArgumentException("Error : invalid position");}
+        if (!validPosition(i,j)) {return false;}
 
         if (grid[i][j]==null || grid[i][j].isEmpty()) {
             return false;
@@ -105,6 +105,8 @@ public class TablutBoard extends ContainerElement {
     return an array of the neighbors of a tile in the grid,
     [ NORTH , EST, SOUTH, WEST ]
     */
+
+
     public TablutPawn[] getNeighbors(int i, int j) {
         TablutPawn[] neighbors = new TablutPawn[4];
 
@@ -121,6 +123,7 @@ public class TablutBoard extends ContainerElement {
         if (validPosition(i, j-1)) neighbors[3] = (TablutPawn) getElement(i, j-1);
 
         return neighbors;
+
     }
 
 

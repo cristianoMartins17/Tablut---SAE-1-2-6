@@ -54,6 +54,8 @@ public class TablutController extends Controller{
                 System.out.print(p.getName() + " -> ");
                 try {
                     String line = consoleIn.readLine();
+                    line = line.replace(" ", "");
+                    line=line.toUpperCase();
                     ok = analyseAndPlay(line);
                     if(!ok){
                         System.out.println("rentrez une valeur correct, réessayez");
@@ -111,7 +113,7 @@ public class TablutController extends Controller{
     }
 
     public boolean syntaxCheck(String line) {
-        line = line.replace(" ", "");
+
         if (line.length()<4) {return false;}
         if (line.length()==4) {
             return validCellName(line.charAt(0), line.charAt(1)) && validCellName(line.charAt(2), line.charAt(3));
@@ -131,7 +133,7 @@ public class TablutController extends Controller{
         if (Character.isDigit(c1)) {digitCount++;}
         if (Character.isDigit(c2)) {digitCount++;}
 
-        if (letterCount!=digitCount) {return false;}
+        if (letterCount!= 1 || digitCount!=1) {return false;}
 
         char letter = (Character.isAlphabetic(c1)) ? c1 : c2;
         char digit = (Character.isDigit(c1)) ? c1 : c2;
