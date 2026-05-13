@@ -11,9 +11,13 @@ import boardifier.model.action.ActionList;
 import boardifier.view.View;
 import model.TablutStageModel;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+
+
 
 public class TablutController extends Controller{
 
@@ -51,9 +55,7 @@ public class TablutController extends Controller{
                 System.out.print(p.getName() + " -> ");
                 try {
                     String line = consoleIn.readLine();
-                    if ( line.length() == 4 ){
-                        ok = analyseAndPlay(line);
-                    }
+                    ok = analyseAndPlay(line);
                     if(!ok){
                         System.out.println("rentrez une valeur correct, réessayez");
                     }
@@ -72,23 +74,20 @@ public class TablutController extends Controller{
     private boolean analyseAndPlay(String line){
         // analyse si un coup et correct
         TablutStageModel gameStage = (TablutStageModel) model.getGameStage();
-        int colPawn = (int) (line.charAt(0)- 'A');
-        int rowPawn = (int) (line.charAt(1)- '1');
-        if ((colPawn<0)||(colPawn>2)) return false;
-        if ((rowPawn<0)||(rowPawn>2)) return false;
-        int col = (int) (line.charAt(2) - 'A');
-        int row = (int) (line.charAt(3) - '1');
-        if ((col<0)||(col>2)) return false;
-        if ((row<0)||(row>2)) return false;
-        ContainerElement pot = null;
-        if (model.getIdPlayer() ==0){
-            // black pawn
-        } else {
-            // white pawn
-        }
-        if(pot.isEmptyAt(colPawn,0)) return false;
-        if(pot.isEmptyAt(rowPawn,0)) return false;
-        GameElement pawn = pot.getElement(colPawn,rowPawn);
+
+        if (!syntaxCheck(line)) {return false;}
+
+        int n = line.length();
+
+        Point begin = getIndexs(line.charAt(0), line.charAt(1));
+        Point dest = getIndexs(line.charAt(n-2), line.charAt(n-1));
+
+        ContainerElement board = gameStage.getBoard();
+
+
+        GameElement pawn = board.getElement(begin.y, begin.x);
+
+        System.out.println(begin.y+" "+ begin.x);
         // a finir
         return true;
     }
@@ -96,11 +95,37 @@ public class TablutController extends Controller{
     public boolean syntaxCheck(String line) {
 
         line = line.replace(" ", "");
-        if (line.length()!=4 && line.length()!=6) {return false;}
+        if (line.length()<4) {return false;}
+        if (line.length()==4) {
+            return validCellName(line.charAt(0), line.charAt(1)) && validCellName(line.charAt(2), line.charAt(3));
+        }
+        else {
+            int n=line.length();
+            return validCellName(line.charAt(0), line.charAt(1)) && validCellName(line.charAt(n-2), line.charAt(n-1));
+        }
+    }
 
-        // à compléter
-        return false;
+    public boolean validCellName(char c1, char c2) {
+        int letterCount=0;
+        if (Character.isAlphabetic(c1)) {letterCount+=1;}
+        if (Character.isAlphabetic(c2)) {letterCount++;}
 
+        int digitCount=0;
+        if (Character.isDigit(c1)) {digitCount++;}
+        if (Character.isDigit(c2)) {digitCount++;}
+
+        if (letterCount!=digitCount) {return false;}
+
+        char letter = (Character.isAlphabetic(c1)) ? c1 : c2;
+        char digit = (Character.isDigit(c1)) ? c1 : c2;
+
+        return (digit>'0' && digit<='9' && letter>='A' && letter<='I');
+    }
+
+    public Point getIndexs(char c1, char c2) {
+        char letter=Character.isAlphabetic(c1) ? c1 : c2;
+        char digit = Character.isDigit(c1) ? c1 : c2;
+        return new Point(letter-'A',digit-'1');
 
     }
 
