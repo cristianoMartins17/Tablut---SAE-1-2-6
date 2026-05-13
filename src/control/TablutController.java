@@ -4,11 +4,9 @@ import boardifier.control.ActionFactory;
 import boardifier.control.ActionPlayer;
 import boardifier.control.Controller;
 import boardifier.model.GameElement;
-import boardifier.model.ContainerElement;
 import boardifier.model.Model;
 import boardifier.model.Player;
 import boardifier.model.action.ActionList;
-import boardifier.model.action.MoveWithinContainerAction;
 import boardifier.view.View;
 import model.TablutBoard;
 import model.TablutStageModel;
@@ -61,7 +59,9 @@ public class TablutController extends Controller{
                         System.out.println("rentrez une valeur correct, réessayez");
                     }
                 }
-                catch (IOException e){}
+                catch (IOException e){
+                    System.out.println("Error");
+                }
             }
         }
     }
@@ -84,8 +84,8 @@ public class TablutController extends Controller{
 
         int n = line.length();
 
-        Point start = getIndexs(line.charAt(0), line.charAt(1));
-        Point dest = getIndexs(line.charAt(n-2), line.charAt(n-1));
+        Point start = getIndex(line.charAt(0), line.charAt(1));
+        Point dest = getIndex(line.charAt(n-2), line.charAt(n-1));
 
         System.out.println(start+" : "+dest);
 
@@ -111,7 +111,6 @@ public class TablutController extends Controller{
     }
 
     public boolean syntaxCheck(String line) {
-
         line = line.replace(" ", "");
         if (line.length()<4) {return false;}
         if (line.length()==4) {
@@ -140,11 +139,10 @@ public class TablutController extends Controller{
         return (digit>'0' && digit<='9' && letter>='A' && letter<='I');
     }
 
-    public Point getIndexs(char c1, char c2) {
+    public Point getIndex(char c1, char c2) {
         char letter=Character.isAlphabetic(c1) ? c1 : c2;
         char digit = Character.isDigit(c1) ? c1 : c2;
         return new Point(letter-'A',digit-'1');
-
     }
 
 }

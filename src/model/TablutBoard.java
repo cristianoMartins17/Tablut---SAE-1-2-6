@@ -2,6 +2,7 @@ package model;
 
 import boardifier.model.ContainerElement;
 import boardifier.model.Coord2D;
+import boardifier.model.GameElement;
 import boardifier.model.GameStageModel;
 
 import java.awt.*;
@@ -48,6 +49,8 @@ public class TablutBoard extends ContainerElement {
     public boolean isOccuped(int i, int j) {
         return (validPosition(i,j) && grid[i][j].isEmpty());
     }
+
+
 
 
     public boolean isNeighborOccuped(int i, int j, Point vector) {

@@ -33,4 +33,14 @@ public class TablutPawn extends GameElement {
     public int getColor() {
         return color;
     }
+
+    public boolean sameTeam(TablutPawn pawn) {
+        if (color==0) {
+            return pawn.color==0;
+        }
+        else {
+            return pawn.color!=0;
+        }
+
+    }
 }
