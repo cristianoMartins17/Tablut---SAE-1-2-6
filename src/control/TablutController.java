@@ -106,9 +106,14 @@ public class TablutController extends Controller{
 
 
 
-        movement.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
+        movement.setDoEndOfTurn(false);
         ActionPlayer play = new ActionPlayer(model, this, movement);
         play.start();
+
+        ActionList captures = getCaptures(dest.y, dest.x);
+        captures.setDoEndOfTurn(true);
+        ActionPlayer capturesPlayer = new ActionPlayer(model, this, captures);
+        capturesPlayer.start();
 
 
         return true;
@@ -152,8 +157,8 @@ public class TablutController extends Controller{
     }
 
 
-    public ArrayList<RemoveFromContainerAction> getCaptures(int i, int j) {
-        ArrayList<RemoveFromContainerAction> removes = new ArrayList<>();
+    public ActionList getCaptures(int i, int j) {
+        ActionList removes = new ActionList();
         TablutStageModel gameStage = (TablutStageModel) model.getGameStage();
         TablutBoard board = gameStage.getBoard();
         Point[] neighborsCoordinates = board.getNeighborsCoordinates(i,j);
@@ -162,7 +167,7 @@ public class TablutController extends Controller{
             int col=coordinate.x;
             if (board.isCaptured(row, col)) {
                 RemoveFromContainerAction action = new RemoveFromContainerAction(model, board.getFirstElement(row, col));
-                removes.add(action);
+                removes.addSingleAction(action);
             }
         }
         return removes;
