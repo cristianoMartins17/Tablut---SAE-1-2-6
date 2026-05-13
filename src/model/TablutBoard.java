@@ -50,7 +50,15 @@ public class TablutBoard extends ContainerElement {
         return (validPosition(i,j) && grid[i][j].isEmpty());
     }
 
-
+    public boolean safeCell(TablutPawn pawn, int i, int j ) {
+        if (!validPosition(i,j)) {return false;}
+        List<GameElement> cell = getElements(i,j);
+        if (cell.isEmpty()) {return true;}
+        else {
+            TablutPawn pawn2 = (TablutPawn) cell.get(0);
+            return pawn.sameTeam(pawn2);
+        }
+    }
 
 
     public boolean isNeighborOccuped(int i, int j, Point vector) {
@@ -64,20 +72,8 @@ public class TablutBoard extends ContainerElement {
     public boolean isCaptured(int i, int j) {
         if (!validPosition(i,j)) {throw new IllegalArgumentException("Error : invalid position");}
 
-        if (grid[i][j]==null) {
+        if (grid[i][j]==null || grid[i][j].isEmpty()) {
             return false;
-        }
-        if (!grid[i][j].isEmpty()) {
-            if (!grid[i][j-1].isEmpty() && !grid[i][j+1].isEmpty()) {
-                if (((TablutPawn)grid[i][j-1].get(0)).getColor() == ((TablutPawn)grid[i][j+1].get(0)).getColor() && ((TablutPawn)grid[i][j-1].get(0)).getColor() != ((TablutPawn)grid[i][j].get(0)).getColor()) {
-                    return true;
-                }
-            }
-            if (!grid[i-1][j].isEmpty() && !grid[i+1][j].isEmpty()){
-                if (((TablutPawn)grid[i-1][j].get(0)).getColor() == ((TablutPawn)grid[i+1][j].get(0)).getColor() && ((TablutPawn)grid[i][j-1].get(0)).getColor() != ((TablutPawn)grid[i][j].get(0)).getColor()) {
-                    return true;
-                }
-            }
         }
         return false;
     }
