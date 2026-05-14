@@ -101,7 +101,10 @@ public class TablutController extends Controller{
 
         TablutPawn pawn = (TablutPawn) board.getElement(start.y, start.x);
 
-
+        if (pawn.getColor()==TablutPawn.MOSCOVITE && firstPlayer || !firstPlayer &&  pawn.getColor()!=TablutPawn.MOSCOVITE  ) {
+            System.out.println("Vous n'ếtes pas autorisés à jouer ces pions.");
+            return false;
+        }
 
 
 
