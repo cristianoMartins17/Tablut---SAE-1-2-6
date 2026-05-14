@@ -8,8 +8,8 @@ import boardifier.model.GameStageModel;
 public class TablutPawn extends GameElement {
     private int number;
     private int color;
-    public static final int SOLDAT = 0;
-    public static final int MOSCOVITE = 1;
+    public static final int MOSCOVITE = 0;
+    public static final int SOLDAT = 1;
     public static final int ROI=2;
 
 

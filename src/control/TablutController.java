@@ -11,6 +11,7 @@ import boardifier.model.action.RemoveFromContainerAction;
 import boardifier.model.action.RemoveFromStageAction;
 import boardifier.view.View;
 import model.TablutBoard;
+import model.TablutPawn;
 import model.TablutStageModel;
 
 import java.awt.*;
@@ -45,6 +46,7 @@ public class TablutController extends Controller{
     private void playTurn(){
         // surment a modifier car choix des points probablement faux
         Player p = model.getCurrentPlayer();
+
         if (p.getType() == Player.COMPUTER){
             System.out.println("Computer Plays");
             TablutDecider decider = new TablutDecider(model,this);
@@ -72,6 +74,7 @@ public class TablutController extends Controller{
 
     public void endOfTurn(){
         model.setNextPlayer();
+        firstPlayer=!firstPlayer;
         Player p = model.getCurrentPlayer();
         TablutStageModel stageModel = (TablutStageModel) model.getGameStage();
         stageModel.getPlayerName().setText(p.getName());
@@ -91,16 +94,18 @@ public class TablutController extends Controller{
         Point start = getIndex(line.charAt(0), line.charAt(1));
         Point dest = getIndex(line.charAt(n-2), line.charAt(n-1));
 
-        System.out.println(start+" : "+dest);
+//        System.out.println(start+" : "+dest);
 
         ArrayList<Point> validsDirections = new ArrayList<>(gameStage.getBoard().computeValidMoves(start.y,start.x));
-        System.out.println(validsDirections);
         if (!validsDirections.contains(dest) || board.getElements(start.y,start.x).isEmpty()) {return false;}
 
-        GameElement pawn = board.getElement(start.y, start.x);
+        TablutPawn pawn = (TablutPawn) board.getElement(start.y, start.x);
 
 
-        System.out.println(dest.y+" "+dest);
+
+
+
+
 
 
         ActionList movement= ActionFactory.generateMoveWithinContainer(model, pawn, dest.y , dest.x);

@@ -7,7 +7,7 @@ import model.TablutPawn;
 
 public class PawnLook extends ElementLook {
 
-    private static String[] backgrounds = new String[] {ConsoleColor.YELLOW_BACKGROUND, ConsoleColor.GREEN_BACKGROUND, ConsoleColor.WHITE_BACKGROUND};
+    private static String[] backgrounds = new String[] {ConsoleColor.GREEN_BACKGROUND, ConsoleColor.YELLOW_BACKGROUND,  ConsoleColor.WHITE_BACKGROUND};
     private static char[] display = new char[] {'M', 'S', 'R'};
     public PawnLook(GameElement element) {
         super(element, 1, 1);

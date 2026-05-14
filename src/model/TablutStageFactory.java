@@ -25,7 +25,7 @@ public class TablutStageFactory extends StageElementsFactory {
 
         for (int i=0;i<posMoscovite.length;i++) {
             int[] pos = posMoscovite[i];
-            TablutPawn pawn = new TablutPawn(stageModel, 1, 0);
+            TablutPawn pawn = new TablutPawn(stageModel, 0, 0);
             board.addElement(pawn, pos[0], pos[1]);
             moscovite[i]=pawn;
         }
@@ -37,7 +37,7 @@ public class TablutStageFactory extends StageElementsFactory {
 
         for (int i=0; i<posSoldats.length; i++) {
             int[] pos = posSoldats[i];
-            TablutPawn pawn = new TablutPawn(stageModel, 0, 1);
+            TablutPawn pawn = new TablutPawn(stageModel, 1, 1);
             board.addElement(pawn, pos[0], pos[1]);
             soldats[i]=pawn;
         }
