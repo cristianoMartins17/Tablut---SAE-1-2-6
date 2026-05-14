@@ -12,11 +12,26 @@ import java.util.List;
 
 
 public class TablutBoard extends ContainerElement {
+    private Point kingPos;
+
+
     public TablutBoard(int x, int y, GameStageModel gameStageModel) {
         // call the super-constructor to create a 3x3 grid, named "holeboard", and in x,y in space
         super("tablutboard", x, y, 9 , 9, gameStageModel);
+        this.kingPos=new Point(5,5);
 
     }
+
+    public void setKingPos(int i, int j) {
+        kingPos.x=j;
+        kingPos.y=i;
+    }
+
+    public Point getKingPos() {
+        return kingPos;
+    }
+
+
 
 
 

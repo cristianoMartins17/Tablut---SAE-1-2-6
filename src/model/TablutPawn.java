@@ -19,9 +19,6 @@ public class TablutPawn extends GameElement {
         this.color=color;
         this.gameStageModel=gameStage;
         this.container=gameStage.getContainers().get(0);
-        System.out.println(this.getContainer());
-
-
         ElementTypes.register("pawn", 51);
         setType(51);
     }

@@ -84,40 +84,25 @@ public class TablutController extends Controller{
         // analyse si un coup et corrert
         TablutStageModel gameStage = (TablutStageModel) model.getGameStage();
         TablutBoard board = gameStage.getBoard();
-
         if (!syntaxCheck(line)) {return false;}
-
-
-
         int n = line.length();
-
         Point start = getIndex(line.charAt(0), line.charAt(1));
         Point dest = getIndex(line.charAt(n-2), line.charAt(n-1));
-
 //        System.out.println(start+" : "+dest);
-
         ArrayList<Point> validsDirections = new ArrayList<>(gameStage.getBoard().computeValidMoves(start.y,start.x));
         if (!validsDirections.contains(dest) || board.getElements(start.y,start.x).isEmpty()) {return false;}
-
         TablutPawn pawn = (TablutPawn) board.getElement(start.y, start.x);
-
         if (pawn.getColor()==TablutPawn.MOSCOVITE && firstPlayer || !firstPlayer &&  pawn.getColor()!=TablutPawn.MOSCOVITE  ) {
-            System.out.println("Vous n'ếtes pas autorisés à jouer ces pions.");
+            System.out.println("Vous n'êtes pas autorisés à jouer ce pion, il ne fait pas partie de votre équipe.");
             return false;
         }
-
-
-
-
-
-
         ActionList movement= ActionFactory.generateMoveWithinContainer(model, pawn, dest.y , dest.x);
-
-
-
         movement.setDoEndOfTurn(false);
         ActionPlayer play = new ActionPlayer(model, this, movement);
         play.start();
+        if (pawn.getColor()==TablutPawn.ROI) {
+            board.setKingPos(dest.y, dest.x);
+        }
 
         ActionList captures = getCaptures(dest.y, dest.x);
         captures.setDoEndOfTurn(true);
@@ -180,6 +165,7 @@ public class TablutController extends Controller{
             }
         }
         return removes;
+
 
     }
 
