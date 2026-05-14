@@ -6,9 +6,9 @@ import boardifier.model.*;
 public class TablutStageModel extends GameStageModel {
 
     // define stage state variables
-    private int blackPawnsToPlay;
-    private int redPawnsToPlay;
+
     // define stage game elements
+
     private TablutBoard board;
     private TablutPawn[] blackPawns;
     private TablutPawn[] grayPawns;
@@ -19,22 +19,8 @@ public class TablutStageModel extends GameStageModel {
 
     public TablutStageModel(String name, Model model) {
         super(name, model);
-        blackPawnsToPlay = 4;
-        redPawnsToPlay = 4;
-        setupCallbacks();
+//        setupCallbacks();
     }
-
-    //Uncomment this 2 methods if example with a main container is used
-    /*
-    public ContainerElement getMainContainer() {
-        return mainContainer;
-    }
-
-    public void setMainContainer(ContainerElement mainContainer) {
-        this.mainContainer = mainContainer;
-        addContainer(mainContainer);
-    }
-     */
 
     public TablutBoard getBoard() {
         return board;
@@ -88,22 +74,22 @@ public class TablutStageModel extends GameStageModel {
 
 
 
-    private void setupCallbacks() {
-        onPutInContainer( (element, gridDest, rowDest, colDest) -> {
-            // just check when pawns are put in 3x3 board
-            if (gridDest != board) return;
-            TablutPawn p = (TablutPawn) element;
-            if (p.getColor() == 0) {
-                blackPawnsToPlay--;
-            }
-            else {
-                redPawnsToPlay--;
-            }
-            if ((blackPawnsToPlay == 0) && (redPawnsToPlay == 0)) {
-                computePartyResult();
-            }
-        });
-    }
+//    private void setupCallbacks() {
+//        onPutInContainer( (element, gridDest, rowDest, colDest) -> {
+//            // just check when pawns are put in 3x3 board
+//            if (gridDest != board) return;
+//            TablutPawn p = (TablutPawn) element;
+//            if (p.getColor() == 0) {
+//                blackPawnsToPlay--;
+//            }
+//            else {
+//                redPawnsToPlay--;
+//            }
+//            if ((blackPawnsToPlay == 0) && (redPawnsToPlay == 0)) {
+//                computePartyResult();
+//            }
+//        });
+//    }
 
     private void computePartyResult() {
         int idWinner = -1;

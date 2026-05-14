@@ -8,6 +8,7 @@ import boardifier.model.Model;
 import boardifier.model.Player;
 import boardifier.model.action.ActionList;
 import boardifier.model.action.RemoveFromContainerAction;
+import boardifier.model.action.RemoveFromStageAction;
 import boardifier.view.View;
 import model.TablutBoard;
 import model.TablutStageModel;
@@ -166,7 +167,7 @@ public class TablutController extends Controller{
             int row=coordinate.y;
             int col=coordinate.x;
             if (board.isCaptured(row, col)) {
-                RemoveFromContainerAction action = new RemoveFromContainerAction(model, board.getFirstElement(row, col));
+                RemoveFromStageAction action = new RemoveFromStageAction(model, board.getFirstElement(row, col));
                 removes.addSingleAction(action);
             }
         }

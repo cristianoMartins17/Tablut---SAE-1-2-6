@@ -10,14 +10,14 @@ import model.TablutStageFactory;
 
 public class Main {
     public static void main(String[] args) {
-// enregistrer le stage
+
         StageFactory.registerModelAndView("tablut", "model.TablutStageModel", "View.TablutStageLook");
 
 
-// créer le modèle global
+
         Model model = new Model();
 
-// créer la vue
+
         View view = new View(model);
 
 
@@ -26,6 +26,7 @@ public class Main {
 
         model.addHumanPlayer("Joueur 1");
         model.addHumanPlayer("Joueur 2");
+
 
         controller.setFirstStageName("tablut");
         try {

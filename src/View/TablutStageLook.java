@@ -67,11 +67,8 @@ public class TablutStageLook extends GameStageView {
         }
         addLook(new PawnLook(model.getKing()));
         addLook(new TextLook(model.getPlayerName()));
-
         /*
         Example using a main container (see HoleStageFactory),
-
-
         // create a look for the main container element, with flexible cell size and no borders
         // NB: no need to recreate spanning for the container look: they are deduced from the main container element
         ContainerLook mainLook = new ContainerLook(model.getMainContainer(), -1);
