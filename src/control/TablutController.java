@@ -19,6 +19,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Set;
 
 
 public class TablutController extends Controller{
@@ -116,15 +117,17 @@ public class TablutController extends Controller{
     }
 
     public boolean syntaxCheck(String line) {
-
         if (line.length()<4) {return false;}
-        if (line.length()==4) {
-            return validCellName(line.charAt(0), line.charAt(1)) && validCellName(line.charAt(2), line.charAt(3));
+        int n=line.length();
+        String word = line.substring(2,n-2).toUpperCase();
+        switch (word) {
+            case "","TO","VERS","À":
+                break;
+            default:
+                return false;
         }
-        else {
-            int n=line.length();
-            return validCellName(line.charAt(0), line.charAt(1)) && validCellName(line.charAt(n-2), line.charAt(n-1));
-        }
+        return validCellName(line.charAt(0), line.charAt(1)) && validCellName(line.charAt(n-2), line.charAt(n-1));
+
     }
 
     public boolean validCellName(char c1, char c2) {
