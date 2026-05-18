@@ -17,11 +17,11 @@ import java.util.*;
 import java.util.List;
 
 
-public class TablutDecider extends Decider {
+public class TablutDeciderSmart extends Decider {
 
     private static final Random loto = new Random(Calendar.getInstance().getTimeInMillis());
 
-    public TablutDecider(Model model, Controller control) {
+    public TablutDeciderSmart(Model model, Controller control) {
         super(model, control);
     }
 
