@@ -3,11 +3,9 @@ package control;
 import boardifier.control.ActionFactory;
 import boardifier.control.ActionPlayer;
 import boardifier.control.Controller;
-import boardifier.model.GameElement;
 import boardifier.model.Model;
 import boardifier.model.Player;
 import boardifier.model.action.ActionList;
-import boardifier.model.action.RemoveFromContainerAction;
 import boardifier.model.action.RemoveFromStageAction;
 import boardifier.view.View;
 import model.TablutBoard;
@@ -19,17 +17,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Set;
+import java.util.Random;
 
 
 public class TablutController extends Controller{
 
     BufferedReader consoleIn;
-    Boolean firstPlayer;
+    Boolean soldat;
 
     public TablutController(Model model, View view){
         super(model, view);
-        firstPlayer = true;
+        soldat = new Random().nextBoolean();
     }
 
 
@@ -48,6 +46,7 @@ public class TablutController extends Controller{
         // surment a modifier car choix des points probablement faux
         Player p = model.getCurrentPlayer();
 
+
         if (p.getType() == Player.COMPUTER){
             System.out.println("Computer Plays");
             TablutDecider decider = new TablutDecider(model,this);
@@ -56,7 +55,9 @@ public class TablutController extends Controller{
         } else {
             boolean ok = false;
             while(!ok){
-                System.out.print(p.getName() + " -> ");
+                String tour = (soldat) ? " (soldat) " : " (moscovite) ";
+
+                System.out.print(p.getName() + tour + " -> ");
                 try {
                     String line = consoleIn.readLine();
                     line = line.replace(" ", "");
@@ -75,7 +76,7 @@ public class TablutController extends Controller{
 
     public void endOfTurn(){
         model.setNextPlayer();
-        firstPlayer=!firstPlayer;
+        soldat =!soldat;
         Player p = model.getCurrentPlayer();
         TablutStageModel stageModel = (TablutStageModel) model.getGameStage();
         stageModel.getPlayerName().setText(p.getName());
@@ -93,7 +94,7 @@ public class TablutController extends Controller{
         ArrayList<Point> validsDirections = new ArrayList<>(gameStage.getBoard().computeValidMoves(start.y,start.x));
         if (!validsDirections.contains(dest) || board.getElements(start.y,start.x).isEmpty()) {return false;}
         TablutPawn pawn = (TablutPawn) board.getElement(start.y, start.x);
-        if (pawn.getColor()==TablutPawn.MOSCOVITE && firstPlayer || !firstPlayer &&  pawn.getColor()!=TablutPawn.MOSCOVITE  ) {
+        if (pawn.getColor()==TablutPawn.MOSCOVITE && soldat || !soldat &&  pawn.getColor()!=TablutPawn.MOSCOVITE  ) {
             System.out.println("Vous n'êtes pas autorisés à jouer ce pion, il ne fait pas partie de votre équipe.");
             return false;
         }
