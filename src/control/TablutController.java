@@ -98,7 +98,8 @@ public class TablutController extends Controller{
             System.out.println("Vous n'êtes pas autorisés à jouer ce pion, il ne fait pas partie de votre équipe.");
             return false;
         }
-        ActionList movement= ActionFactory.generateMoveWithinContainer(model, pawn, dest.y , dest.x);
+        ActionList movement= generateMovement(pawn, dest.y, dest.x);
+        if (movement==null) {return false;}
         movement.setDoEndOfTurn(false);
         ActionPlayer play = new ActionPlayer(model, this, movement);
         play.start();
@@ -151,6 +152,19 @@ public class TablutController extends Controller{
         char letter=Character.isAlphabetic(c1) ? c1 : c2;
         char digit = Character.isDigit(c1) ? c1 : c2;
         return new Point(letter-'A',digit-'1');
+    }
+
+    public ActionList generateMovement(TablutPawn pawn, int destI, int destJ) {
+        TablutStageModel gameStage = (TablutStageModel) model.getGameStage();
+        TablutBoard board = gameStage.getBoard();
+        if (pawn.getColor()!=TablutPawn.ROI && board.isCenter(destI, destJ)) {
+            System.out.println("Seul le roi peut se deplacer en E5.");
+            return null;
+        }
+        ActionList movement= ActionFactory.generateMoveWithinContainer(model, pawn, destI , destJ);
+        movement.setDoEndOfTurn(false);
+        return movement;
+
     }
 
 

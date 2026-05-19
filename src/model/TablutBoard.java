@@ -62,12 +62,15 @@ public class TablutBoard extends ContainerElement {
 
     public int minMovementKing() {
 
-        int[][] store = create2DArrayOfMaxValue(9,9,Integer.MAX_VALUE);
+        int[][] grid = create2DArrayOfMaxValue(9,9,Integer.MAX_VALUE);
+
+
 
         return 0;
     }
 
     public void minMovementKingRecursive(int[][] grid,int i, int j, int oldI, int oldJ) {
+//        if (!safeCell())
 
     }
 
