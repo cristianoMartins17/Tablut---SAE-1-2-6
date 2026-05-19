@@ -31,6 +31,33 @@ public class TablutBoard extends ContainerElement {
         return kingPos;
     }
 
+    public int[][] create2DArrayOfMaxValue(int i, int j, int value) {
+        int[][] result = new int[i][j];
+        for (int[] array : result) {
+            for (int k=0; k<array.length;k++ ) {
+                array[k]=value;
+            }
+        }
+        return result;
+    }
+
+    public int minMovementKing() {
+
+        int[][] store = create2DArrayOfMaxValue(9,9,Integer.MAX_VALUE);
+
+
+
+
+
+
+
+        return 0;
+    }
+
+    public void minMovementKingRecursive(int[][] grid,int i, int j, int oldI, int oldJ) {
+
+    }
+
 
 
 
@@ -48,7 +75,7 @@ public class TablutBoard extends ContainerElement {
     }
 
     public boolean safeCell(TablutPawn pawn, int i, int j ) {
-        if (!validPosition(i,j)) {return false;}
+        if (!validPosition(i,j)) {return true;}
         List<GameElement> cell = getElements(i,j);
         if (cell.isEmpty()) {return true;}
         else {
