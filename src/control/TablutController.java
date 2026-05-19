@@ -85,6 +85,7 @@ public class TablutController extends Controller{
     private boolean analyseAndPlay(String line){
         // analyse si un coup et corrert
         TablutStageModel gameStage = (TablutStageModel) model.getGameStage();
+
         TablutBoard board = gameStage.getBoard();
         if (!syntaxCheck(line)) {return false;}
         int n = line.length();
@@ -111,6 +112,8 @@ public class TablutController extends Controller{
         captures.setDoEndOfTurn(true);
         ActionPlayer capturesPlayer = new ActionPlayer(model, this, captures);
         capturesPlayer.start();
+
+        board.minMovementKing();
 
 
         return true;
@@ -158,7 +161,7 @@ public class TablutController extends Controller{
         TablutStageModel gameStage = (TablutStageModel) model.getGameStage();
         TablutBoard board = gameStage.getBoard();
         if (pawn.getColor()!=TablutPawn.ROI && board.isCenter(destI, destJ)) {
-            System.out.println("Seul le roi peut se deplacer en E5.");
+            System.out.println("Seul le roi peut se déplacer en E5.");
             return null;
         }
         ActionList movement= ActionFactory.generateMoveWithinContainer(model, pawn, destI , destJ);

@@ -146,7 +146,6 @@ public abstract class Controller {
                     v.onSelectionChange();
                 }
                 else if (e.isFaceEvent()) {
-                    System.out.println(k);
                     queue.removeEvent(i--);
                     v.onFaceChange();
                 }

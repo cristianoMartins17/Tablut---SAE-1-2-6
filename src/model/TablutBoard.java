@@ -1,20 +1,19 @@
 package model;
 
 import boardifier.model.ContainerElement;
-import boardifier.model.Coord2D;
 import boardifier.model.GameElement;
 import boardifier.model.GameStageModel;
 
 import java.awt.*;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 
-
 public class TablutBoard extends ContainerElement {
     private Point kingPos;
+
+
 
 
     public TablutBoard(int x, int y, GameStageModel gameStageModel) {
@@ -41,6 +40,10 @@ public class TablutBoard extends ContainerElement {
         return result;
     }
 
+    public boolean isBorder(int i, int j) {
+        return i==0 || i==8 || j==0 || j==8;
+    }
+
     public int kingObstruction() {
         int i=kingPos.y;
         int j=kingPos.x;
@@ -57,20 +60,66 @@ public class TablutBoard extends ContainerElement {
     }
 
 
+    public static void printInt2DArray(int[][] array) {
+        System.out.println("[");
+        for (int[] row : array) {
+            System.out.print("  [");
+            for (int i = 0; i < row.length; i++) {
+                System.out.print(row[i]);
+                if (i < row.length - 1) System.out.print(", ");
+            }
+            System.out.println("]");
+        }
+        System.out.println("]");
+    }
+
+
 
 
 
     public int minMovementKing() {
 
+        int kingI=kingPos.y,kingJ=kingPos.x;
         int[][] grid = create2DArrayOfMaxValue(9,9,Integer.MAX_VALUE);
+        grid[kingI][kingJ]=0;
+        TablutPawn king =(TablutPawn) this.getElement(kingI, kingJ);
+
+        Point[] directions = new Point[] {new Point(1,0), new Point(-1,0), new Point(0,1), new Point(0,-1)};
+        IntegerWrap min = new IntegerWrap(Integer.MAX_VALUE);
+        minMovementKingRecursive(grid, kingI, kingJ+1, kingI,kingJ,directions,1,min);
+        minMovementKingRecursive(grid, kingI, kingJ-1, kingI,kingJ,directions,1,min);
+        minMovementKingRecursive(grid, kingI+1, kingJ, kingI,kingJ,directions,1,min);
+        minMovementKingRecursive(grid, kingI-1, kingJ, kingI,kingJ,directions,1,min);
+
+        printInt2DArray(grid);
+        System.out.println(min.getValue());
 
 
-
-        return 0;
+        return min.getValue();
     }
 
-    public void minMovementKingRecursive(int[][] grid,int i, int j, int oldI, int oldJ) {
-//        if (!safeCell())
+    public void minMovementKingRecursive(int[][] grid, int i, int j, int oldI, int oldJ, Point[] directions, int increment, IntegerWrap min) {
+        if (!validPosition(i,j)) {return;}
+        if (isOccuped(i, j)) {return;}
+        Point previousDirection =new Point(j-oldJ, i-oldI);
+        if (grid[i][j]> grid[oldI][oldJ]+increment) {
+            grid[i][j]=grid[oldI][oldJ]+increment;
+            if (grid[i][j]<min.getValue() && isBorder(i,j)) {
+                min.setValue(grid[i][j]);
+            }
+        }
+        else {
+            return;
+        }
+        for (Point direction : directions) {
+            if (!direction.equals(previousDirection)) {
+                minMovementKingRecursive(grid, i+direction.y, j+direction.x,i,j, directions, 1,min);
+            }
+            else {
+                minMovementKingRecursive(grid, i+direction.y, j+direction.x,i,j, directions, 0,min);
+            }
+        }
+
 
     }
 
@@ -87,7 +136,7 @@ public class TablutBoard extends ContainerElement {
     }
 
     public boolean isOccuped(int i, int j) {
-        return (validPosition(i,j) && grid[i][j].isEmpty());
+        return (validPosition(i,j) && !grid[i][j].isEmpty());
     }
 
     public boolean safeCell(TablutPawn pawn, int i, int j ) {
@@ -193,5 +242,24 @@ public class TablutBoard extends ContainerElement {
 
 
 
-
 }
+
+class IntegerWrap {
+    int value;
+
+    IntegerWrap(int v) {
+        this.value=v;
+    }
+
+    public void setValue(int v) {
+        value=v;
+    }
+
+    public int getValue() {
+        return value;
+    }
+}
+
+
+
+
