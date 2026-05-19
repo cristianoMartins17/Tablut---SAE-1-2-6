@@ -17,7 +17,7 @@ public class TablutStageFactory extends StageElementsFactory {
     public void setup() {
 
 
-        TablutBoard board = new TablutBoard(0,0 , stageModel);
+        TablutBoard board = new TablutBoard(0,1 , stageModel);
         stageModel.setBoard(board);
 
         int[][] posMoscovite = { {0,3},{0,4},{0,5}, {1,4}, {3,0},{4,0},{5,0}, {8,3},{8,4},{8,5}, {7,4}, {3,8},{4,8},{5,8}, {4,1},{4,7}};
@@ -46,7 +46,10 @@ public class TablutStageFactory extends StageElementsFactory {
 
         TablutPawn king = new TablutPawn(stageModel, 2, 2);
         board.addElement(king, 4,4);
-        stageModel.setPlayerName(new TextElement(" ", stageModel));
+        TextElement playerName=new TextElement(" ", stageModel);
+        playerName.setLocation(0,0);
+        stageModel.setPlayerName(playerName);
+
         stageModel.setKing(king);
         stageModel.setBlackPawns(moscovite);
         stageModel.setGrayPawns(soldats);
