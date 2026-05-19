@@ -6,7 +6,9 @@ import boardifier.model.GameElement;
 import boardifier.model.GameStageModel;
 
 import java.awt.*;
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -18,8 +20,7 @@ public class TablutBoard extends ContainerElement {
     public TablutBoard(int x, int y, GameStageModel gameStageModel) {
         // call the super-constructor to create a 3x3 grid, named "holeboard", and in x,y in space
         super("tablutboard", x, y, 9 , 9, gameStageModel);
-        this.kingPos=new Point(5,5);
-
+        this.kingPos=new Point(4,4);
     }
 
     public void setKingPos(int i, int j) {
@@ -34,22 +35,34 @@ public class TablutBoard extends ContainerElement {
     public int[][] create2DArrayOfMaxValue(int i, int j, int value) {
         int[][] result = new int[i][j];
         for (int[] array : result) {
-            for (int k=0; k<array.length;k++ ) {
-                array[k]=value;
-            }
+            Arrays.fill(array,value);
         }
+
         return result;
     }
+
+    public int kingObstruction() {
+        int i=kingPos.y;
+        int j=kingPos.x;
+        if (grid[i][j].isEmpty()) {return Integer.MAX_VALUE;}
+
+        TablutPawn king = (TablutPawn)  getElement(kingPos.y, kingPos.x);
+        int score=0;
+        score =(!safeCell(king, i+1,j)) ? score+1 : score;
+        score =(!safeCell(king, i-1,j)) ? score+1 : score;
+        score =(!safeCell(king, i,j+1)) ? score+1 : score;
+        score =(!safeCell(king, i,j-1)) ? score+1 : score;
+        return score;
+
+    }
+
+
+
+
 
     public int minMovementKing() {
 
         int[][] store = create2DArrayOfMaxValue(9,9,Integer.MAX_VALUE);
-
-
-
-
-
-
 
         return 0;
     }

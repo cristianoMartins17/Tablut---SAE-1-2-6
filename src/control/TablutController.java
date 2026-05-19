@@ -128,7 +128,6 @@ public class TablutController extends Controller{
                 return false;
         }
         return validCellName(line.charAt(0), line.charAt(1)) && validCellName(line.charAt(n-2), line.charAt(n-1));
-
     }
 
     public boolean validCellName(char c1, char c2) {
